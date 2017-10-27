@@ -1,0 +1,118 @@
+create database CarRental
+
+create table UserReg(vFirstName varchar(100),
+					vLastName varchar(100),
+				    vEmail varchar(100),
+				    vPassword varchar(100),
+				    vGender varchar(100),
+				    cMobile varchar(100),
+				    vDOB date,
+				    vCity varchar(100))
+
+sp_help userReg
+				 
+				 
+create proc usp_UserRegInsert(@vFirstName varchar(100),
+							 @vLastName varchar(100),
+							 @vEmail varchar(100),
+							 @vPassword varchar(100),
+							 @vGender varchar(100),	
+							 @cMobile varchar(100),					 
+							 @vDOB date,
+							 @vCity varchar(100))
+							 
+															
+as
+if(not exists(select * from UserReg where vEmail=@vEmail))
+begin
+insert UserReg(vFirstName,vLastName,vEmail,vPassword,vDOB,vGender,cMobile,vCity)values
+			 (@vFirstName,@vLastName,@vEmail,@vPassword,@vDOB,@vGender,@cMobile,@vCity)
+end
+else
+Print 'Email already exists'				 
+				  
+				 
+create table carDetails(vCarID varchar(100),
+						 vCarName varchar(100),
+				         cCarPricePerKm varchar(100),
+						 vCarType varchar(100),
+						 cCarCapacity varchar(100),
+						 vCarImage varbinary(max))	
+ 
+//drop table carDetails
+sp_help carDetails	
+
+create proc usp_carDetails(@vCarID varchar(100),
+							     @vCarName varchar(100),
+							     @cCarPricePerKm varchar(100),
+							     @vCarType varchar(100),
+							     @cCarCapacity varchar(100),
+								 @vCarImage varbinary(max))
+as
+if(not exists(select * from carDetails where vCarID=@vCarID))
+begin
+insert carDetails(vCarID,vCarName,cCarPricePerKm,vCarType,cCarCapacity,vCarImage)values
+			 (@vCarID,@vCarName,@cCarPricePerKm,@vCarType,@cCarCapacity,@vCarImage)
+end
+else
+Print 'CarID Exists'
+
+
+
+select * from carDetails
+select * from userreg	 
+
+
+
+create proc usp_carDetailsUpdate(@vCarID varchar(100),
+							     @vCarName varchar(100),
+							     @cCarPricePerKm varchar(100),
+							     @vCarType varchar(100),
+							     @cCarCapacity varchar(100),
+								 @vCarImage varbinary(max))
+as
+if(exists(select * from carDetails where vCarID=@vCarID))
+Update carDetails set vCarID=@vCarID,vCarName=@vCarName,cCarPricePerKm=cCarPricePerKm,vCarType=@vCarType,cCarCapacity=@cCarCapacity,vCarImage=@vCarImage
+where vCarID=@vCarID
+else
+Print 'CarID doesnt exist'
+
+
+
+create proc usp_carDetailsDelete(@vCarID varchar(100))					 			  							
+as
+if(exists(select * from carDetails where vCarID=@vCarID))
+delete from carDetails
+where vCarID=@vCarID
+else
+Print 'No car details found'
+
+
+
+create table BookingDetails(vBookID int identity Primary Key,
+							vEmail varchar(100) constraint fk_vEmail Foreign Key references UserReg(vEmail),
+							vStartingPoint varchar(100),
+						    vDestination varchar(100),
+						    vCarID varchar(100) constraint fk_vCarID Foreign Key references CarDetails(vCarID),						    
+						    vStartDate date,
+						    vReturnDate date,
+							vStartTime varchar(100),
+							vPickupLocation varchar(100),
+							cTotalPrice money)
+drop table BookingDetails
+alter table UserReg alter column vEmail varchar(100) not null
+alter table UserReg add constraint pk_EmailID Primary Key(vEmail)
+alter table BookingDetails alter column cTotalPrice money
+
+create proc usp_BookingDetails(@vEmail varchar(100),
+							@vStartingPoint varchar(100),
+						    @vDestination varchar(100),
+						    @vCarID varchar(100),						   
+						    @vStartDate date,
+						    @vReturnDate date,
+							@vStartTime varchar(100),
+							@vPickupLocation varchar(100),
+							@cTotalPrice money)
+as
+insert BookingDetails(vEmail,vStartingPoint,vDestination,vCarID,vStartDate,vReturnDate,vStartTime,vPickupLocation,cTotalPrice)values
+			 (@vEmail,@vStartingPoint,@vDestination,@vCarID,@vStartDate,@vReturnDate,@vStartTime,@vPickupLocation,@cTotalPrice)

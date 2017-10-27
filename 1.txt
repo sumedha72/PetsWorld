@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        form error
+        {
+         color:red;
+        }  
+        form label
+        {
+            margin-bottom:2px;
+            display:block;
+           
+        }  
+    </style>
+ 
+    <link href="Content/themes/base/all.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.2.1.js"></script>
+    <script src="Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script src="Scripts/jquery.validate.js"></script>
+    
+
+    <script>
+        $(document).ready(function () {
+            
+            $("#txtdob").datepicker({ dateFormat: "dd-mm-yy", maxDate: "0" });
+
+
+            $("#form1").validate({
+                rules:
+                    {
+                        "txtUserName":
+                           {
+                               required: true,
+                               minlength: 4,
+                               maxlength: 10
+
+                           },
+
+                        "txtPassword":
+                            {
+                                required: true,
+                                minlength: 4,
+                                maxlength: 10
+
+                            }
+                    },
+                messages:
+                    {
+                        "txtUserName":
+                            {
+                                required: "Username cannot be blank",
+                                minlength: "Minimum length cannot be less than four",
+                                maxlength: "Maximum length cannot be greater than ten"
+                            },
+                        "txtPassword":
+                            {
+                                required: "Password cannot be blank",
+                                minlength: "Minimum length cannot be less than four",
+                                maxlength: "Maximum length cannot be greater than ten"
+                            }
+                    }
+            });
+
+
+
+        });
+    </script>
+                                                           
+</head>
+<body>
+    <div id="d2"></div>
+    <h2>User Registration</h2>
+    
+    <form action="" id="form1">
+        <table>
+
+            <tr>
+                <td>
+                    <label> First Name</label>
+                </td>
+                <td>
+
+                    <input type="text" id="txtFirstName"  />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label> Last Name</label>
+                </td>
+                <td>
+                    <input type="text" id="txtLastName"  />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label> Choose User Name</label>
+                </td>
+                <td>
+                    <input type="text" id="txtUserName" name="txtUserName"  />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label> Choose Password</label>
+                </td>
+                <td>
+                    <input type="password" id="txtPassword" name="txtPassword"  />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label> Confirm Password</label>
+                </td>
+                <td>
+                    <input type="password" id="txtConfirmPassword"  />
+                </td>
+            </tr>
+            <tr>
+                <td>
+            <tr>
+                <td>
+                    <label> Enter birthdate</label>
+                </td>
+                <td>
+                    <input type="text" id="txtdob" name="txtdob"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label> Alternate E-mail</label>
+                </td>
+                <td>
+                    <input type="email" id="txtEmail" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label> Choose Gender</label>
+                </td>
+                <td>
+                    <select>
+                        <option>
+                            Male
+                        </option>
+                        <option>
+                            Female
+                        </option>
+                        <option>
+                            Other
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" id="btnSubmit" value="Submit" />
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <input type="reset" id="btnReset" value="Reset" />
+                   
+
+
+
+
+                </td>
+            </tr>
+
+        </table>
+    </form>
+   
+    <div id="d3"></div>
+     <h1>User Login</h1>
+    
+    <input type="submit" id="btnoldAcc" value="Already have an account?" onclick="Launch()" /> 
+    
+    <script>
+        function Launch()
+        {
+            location.href = "HtmlPage4.html";
+        }
+    
+
+        
+    </script>
+
+     
+</body>
+</html>

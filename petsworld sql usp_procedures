@@ -1,0 +1,146 @@
+
+--1--
+create proc usp_Customer_Insert(@iCust_Id int,@vCust_Name varchar(100),@vCust_Gender varchar(50),@vCust_Phone varchar(50),@dCust_DOB datetime,@vCust_Email varchar(100),@vCust_Password varchar(100),@vCust_Address varchar(300))
+as
+if(not exists(select * from Customer where iCust_Id=@iCust_Id))
+begin
+insert customer(iCust_Id,vCust_Name,vCust_Gender,vCust_Phone,dCust_DOB,vCust_Email,vCust_Password,vCust_Address)
+values(@iCust_Id,@vCust_Name,@vCust_Gender,@vCust_Phone,@dCust_DOB,@vCust_Email,@vCust_Password,@vCust_Address)
+end
+else
+print'user already exits'
+
+
+
+--2--
+create proc usp_Animal_Insert(@iAn_Id int, @vAn_Name varchar(200), @vAn_Category varchar(100), @vAn_Height varchar(50), @vAn_Weight varchar(50), @vAn_Color varchar(50), @vAn_Gender varchar(50), @mAn_Price money, @iAn_Stock int)
+as
+if(not exists(select * from Animal where iAn_Id=@iAn_Id))
+begin
+insert Animal(iAn_Id,vAn_Name,vAn_Category,vAn_Height,vAn_Weight,vAn_Color,vAn_Gender,mAn_Price,iAn_Stock)
+values(@iAn_Id, @vAn_Name, @vAn_Category, @vAn_Height, @vAn_Weight, @vAn_Color, @vAn_Gender, @mAn_Price, @iAn_Stock)
+end
+else
+print'animal id cannot be duplicated'
+
+
+
+--3--
+create proc usp_Animal_Update(@iAn_Id int, @vAn_Name varchar(200), @vAn_Category varchar(100), @vAn_Height varchar(50), @vAn_Weight varchar(50), @vAn_Color varchar(50), @vAn_Gender varchar(50), @mAn_Price money, @iAn_Stock int,@imgAn_Image varbinary(max))
+as
+if(exists(select * from Animal where iAn_Id=@iAn_Id))
+begin
+update Animal set vAn_Name=@vAn_Name,vAn_Category=@vAn_Category,vAn_Height=@vAn_Height,
+vAn_Weight=@vAn_Weight,vAn_Color=@vAn_Color,vAn_Gender=@vAn_Gender,mAn_Price= @mAn_Price,iAn_Stock=@iAn_Stock,imgAn_Image=@imgAn_Image
+where iAn_Id=@iAn_Id
+end
+else
+print'animal id cannot be duplicated'
+
+
+--4--
+create proc usp_Animal_Delete(@iAn_Id int, @vAn_Name varchar(200), @vAn_Category varchar(100), @vAn_Height varchar(50), @vAn_Weight varchar(50), @vAn_Color varchar(50), @vAn_Gender varchar(50), @mAn_Price money, @iAn_Stock int,@imgAn_Image varbinary(max))
+as
+if(exists(select * from Animal where iAn_Id=@iAn_Id))
+begin
+delete from Animal where iAn_Id=@iAn_Id
+end
+else
+print'animal  cannot be deleted'
+
+
+--5--
+create usp_Seller_Insert(@iSell_Id int,@vSell_Name varchar(100),@vSell_Address varchar(300),@vSell_Email varchar(100),@vSell_Phone varchar(100), @iSell_AnimalId int)
+as
+if(not exists(select * from Seller where iSell_Id=@iSell_Id))
+begin
+insert Seller(iSell_Id, vSell_Name , vSell_Address, vSell_Email, vSell_Phone , iSell_AnimalId)
+values(@iSell_Id, @vSell_Name,@vSell_Address,@vSell_Email,@vSell_Phone,@iSell_AnimalId)
+end
+else
+print'seller already exists'
+
+
+
+--6--
+create proc usp_Cart_insert(@iCart_Id int, @vCart_Name varchar(100), @iCart_Quantity int, @mCart_Price money)
+as
+if(not exists(select * from Cart where iCart_Id=@iCart_Id))
+begin
+insert Cart(iCart_Id ,vCart_Name ,iCart_Quantity ,mCart_Price )
+values(@iCart_Id,@vCart_Name,@iCart_Quantity,@mCart_Price)
+end
+else
+print'cart details not added' 
+
+
+--7--
+create proc usp_Cart_Update(@iCart_Id int, @vCart_Name varchar(100), @iCart_Quantity int, @mCart_Price money)
+as
+if(exists(select * from Cart where iCart_Id=@iCart_Id))
+begin
+update cart set vCart_Name=@vCart_Name ,iCart_Quantity=@iCart_Quantity,mCart_Price=@mCart_Price
+where iCart_Id=@iCart_Id
+end
+else
+print'cart details updated' 
+
+
+--8--
+create proc usp_Cart_Delete(@iCart_Id int, @vCart_Name varchar(100), @iCart_Quantity int, @mCart_Price money)
+as
+if(exists(select * from Cart where iCart_Id=@iCart_Id))
+begin
+delete from Cart where iCart_Id=@iCart_Id
+end
+else
+print'cart details deleted' 
+
+
+--9--
+create proc usp_Accessories_Insert(@iAcc_Id int, @vAcc_Name varchar(100), @mAcc_Price money, @iAcc_Stock int)
+as
+if(not exists(select * from Accessories where iAcc_Id=@iAcc_Id))
+begin
+insert Accessories(vAcc_Name, mAcc_Price,iAcc_Stock) values( @vAcc_Name, @mAcc_Price ,@iAcc_Stock)
+end
+else
+print'cannot be inserted'
+
+
+--10--
+create proc usp_Accessories_Update(@iAcc_Id int, @vAcc_Name varchar(100), @mAcc_Price money, @iAcc_Stock int)
+as
+if(exists(select * from Accessories where iAcc_Id=@iAcc_Id))
+begin
+update Accessories set vAcc_Name=@vAcc_Name, mAcc_Price=@mAcc_Price,iAcc_Stock=@iAcc_Stock where iAcc_Id=@iAcc_Id
+end
+else
+print'cannot be updated'
+
+
+--11--
+create proc usp_Accessories_Update(@iAcc_Id int, @vAcc_Name varchar(100), @mAcc_Price money, @iAcc_Stock int)
+as
+if(exists(select * from Accessories where iAcc_Id=@iAcc_Id))
+begin
+delete from Accessories where iAcc_Id=@iAcc_Id
+end
+else
+print'cannot be deleted'
+
+
+--12--
+create proc usp_OrderDetails_Insert(@iOrder_Id int ,@iOrder_SellerId int , @iOrder_CustId int, @iOrder_Total int, @imgOrder_Image varbinary(max))
+as
+if(not exists(select * from OrderDetails where ))
+begin
+insert OrderDetailsset(iOrder_Id ,iOrder_SellerId ,iOrder_CustId ,iOrder_Total ,imgOrder_Image) values(@iOrder_Id ,@iOrder_SellerId ,@iOrder_CustId ,@iOrder_Total ,@imgOrder_Image )
+end
+else
+print'cannot be inserted'
+
+
+
+
+

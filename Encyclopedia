@@ -1,0 +1,53 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="PetEncyclopedia.aspx.cs" Inherits="PetsWorld.com.PetEncyclopedia" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+
+
+<asp:Content ID="con" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+
+ <div class="row">
+   <div class="col-md-3 breed_pic">            
+       <a target="_blank" href="Images/1.jpg">
+         <img src="Images/1.jpg"  width="600" height="400"/>
+      </a>
+    <div class="desc">Add a description of the image here</div>
+    </div>
+ </div>
+
+<div class="col-md-3 breed_pic">
+  <a target="_blank" href="Images/2.png">
+    <img src="Images/2.png" width="600" height="400"/>
+  </a>
+  <div class="desc">Add a description of the image here</div>
+</div>
+
+<div class="gallery">
+  <a target="_blank" href="Images/3.jpg">
+    <img src="Images/3.jpg" width="600" height="400"/>
+  </a>
+  <div class="desc">Add a description of the image here</div>
+</div>
+
+<div class="gallery">
+  <a target="_blank" href="Images/4.jpg">
+    <img src="Images/4.jpg"  width="600" height="400"/>
+  </a>
+  <div class="desc">Add a description of the image here</div>
+</div>
+
+    <div class="gallery"> 
+  <a target="_blank" href="Images/5.jpg">
+    <img src="Images/5.jpg"  width="600" height="400"/>
+  </a>
+  <div class="desc">Add a description of the image here</div>
+</div>
+
+    <div class="gallery">
+  <a target="_blank" href="Images/6.jpg">
+    <img src="Images/6.jpg" width="600" height="400"/>
+  </a>
+  <div class="desc">Add a description of the image here</div>
+</div>
+
+</asp:Content>

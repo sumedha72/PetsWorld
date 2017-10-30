@@ -20,30 +20,33 @@
                 <table>
                     <tr>
                         <td>
-                            <asp:Image Width="280" Height="200" ImageUrl='<%#"~/Handler1.ashx?AnimalID="+Eval("iAn_Id") %>' ID="imgThumbnail" runat="server"  />
+                            <asp:Image Width="280" Height="200" ImageUrl='<%#"~/Handler1.ashx?AnimalID="+Eval("iAnimal_Id") %>' ID="imgThumbnail" runat="server"  />
                             <br />
-                            <asp:Label Text='<%#"Name:"+Eval("vAn_Name") %>' ID="lblAnimalName" runat="server" ></asp:Label>
-                            <br />
-
-                            <asp:Label Text='<%#"Height:"+Eval("vAn_Height") %>' ID="lblAnimalHeight" runat="server" ></asp:Label>
-
-                            <br />
-                            <asp:Label Text='<%#"Weight: "+Eval("vAn_Weight") %>' ID="lblAnimalWeight" runat="server" ></asp:Label>
+                            <asp:Label Text='<%#"Name:"+Eval("vAnimalName") %>' ID="lblAnimalName" runat="server" ></asp:Label>
                             <br />
 
-                            <asp:Label Text='<%#"Color "+Eval("vAn_Color") %>' ID="lblAnimalColor" runat="server" ></asp:Label>
+                            <asp:Label Text='<%#"Height:"+Eval("vAnimalHeight") %>' ID="lblAnimalHeight" runat="server" ></asp:Label>
+
+                            <br />
+                            <asp:Label Text='<%#"Weight: "+Eval("vAnimalWeight") %>' ID="lblAnimalWeight" runat="server" ></asp:Label>
                             <br />
 
-                            <asp:Label Text='<%#"Gender: "+Eval("vAn_Gender") %>' ID="lblAnimalGender" runat="server" ></asp:Label>
+                            <asp:Label Text='<%#"Color "+Eval("vAnimalColor") %>' ID="lblAnimalColor" runat="server" ></asp:Label>
                             <br />
 
-                               <asp:Label Text='<%#"Price: "+Eval("vAn_Price") %>' ID="lblAnimalPrice" runat="server" ></asp:Label>
+                            <asp:Label Text='<%#"Gender: "+Eval("vAnimalSex") %>' ID="lblAnimalGender" runat="server" ></asp:Label>
                             <br />
 
-                               <asp:Label Text='<%#"In Stock: "+Eval("vAn_Stock") %>' ID="lblAnimalStock" runat="server" ></asp:Label>
+                               <asp:Label Text='<%#"Price: "+Eval("vAnimalPrice") %>' ID="lblAnimalPrice" runat="server" ></asp:Label>
+                            <br />
+
+                               <asp:Label Text='<%#"In Stock: "+Eval("iAnimalStock") %>' ID="lblAnimalStock" runat="server" ></asp:Label>
+                            <br />
+                            
+                             <asp:Label Text='<%#"Age: "+Eval("iAnimalAge") %>' ID="lblAnimalAge" runat="server" ></asp:Label>
                             <br />
                              
-                            <asp:Button CommandName="Purchase" CommandArgument='<%#Eval("iAn_Id") %>' CssClass="btn" Text="Purchase" ID="cmdPurchase" runat="server" />
+                            <asp:Button CommandName="Purchase" CommandArgument='<%#Eval("iAnimal_Id") %>' CssClass="btn" Text="Purchase" ID="cmdPurchase" runat="server" />
                             
 
                     </tr>

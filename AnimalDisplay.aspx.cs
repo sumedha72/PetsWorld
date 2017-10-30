@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.SqlClient;
 
 namespace WebApplication1
 {
@@ -13,7 +13,7 @@ namespace WebApplication1
     {
         public void Bind()
         {
-            SqlConnection con = new SqlConnection("Data Source=WIN-T5M51LAKF72\\MSSQLSERVER2; Initial Catalog=BookStore; Integrated Security=true;");
+            SqlConnection con = new SqlConnection("Data Source=WIN-NJSGVM20SF5; Initial Catalog=PetsWorld; Integrated Security=true;");
             SqlCommand cmd = new SqlCommand("select * from Animal", con);
             if (con.State == ConnectionState.Closed)
             {
@@ -34,11 +34,19 @@ namespace WebApplication1
         {
             if (!IsPostBack)
                 Bind();
+
         }
 
         protected void dlanimals_ItemCommand(object source, DataListCommandEventArgs e)
         {
+            if (e.CommandName == "Purchase")
+            {
+                Server.Transfer("Purchase.aspx?Ac_ID=" + e.CommandArgument);
 
+
+
+
+            }
         }
     }
 }

@@ -1,0 +1,44 @@
+<body>  
+   <div id="container" style="width:1012px;height:1200px">
+
+            <div id="logo" style="width:1024px;height:125px;">
+                <img src="Images/Logo1.png" width="300" height="120" onclick="Index.aspx" style="float:left;"/>        
+            </div>
+     
+           <div>
+                <ul>
+                    <li><a class="active" href="Index.aspx">Home</a></li>
+                       <li><a href="#Adopt">Buy a Pet</a></li>
+                     <li><a  href="#Sell">Sell a Pet</a></li>
+                    <li><a href="#Shop">Shop Accessories</a></li>
+                    <li><a href="PetEncyclopedia.aspx">Pet Encyclopedia</a></li>
+                    <li style="float:right" class="active"><a href="UserReg.aspx">Register</a></li>
+                    <li style="float:right"><a href="#login">Login</a>
+                        <ul>
+                          <li>
+                          <a href="UserLogin.aspx">User</a>
+                          <a href="AdminLogin.aspx">Admin</a>
+                          </li>
+                        </ul>
+                    </li>
+                </ul>
+           </div>
+
+  
+  
+    <div id="con">  
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">  
+          
+        </asp:ContentPlaceHolder>  
+    </div>  
+  
+  
+            <div id="footer" style="width:1012px;height:200px;background-color:#623b3b;float:left;">
+            </div>
+
+  </div>
+
+    <form id="form1" runat="server">  
+      
+    </form>  
+</body>  

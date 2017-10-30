@@ -13,15 +13,16 @@ print'user already exits'
 
 
 --2--
-create proc usp_Animal_Insert(@iAn_Id int, @vAn_Name varchar(200), @vAn_Category varchar(100), @vAn_Height varchar(50), @vAn_Weight varchar(50), @vAn_Color varchar(50), @vAn_Gender varchar(50), @mAn_Price money, @iAn_Stock int)
+create proc usp_Animal_Insert(@iAn_Id int, @vAn_Name varchar(200), @vAn_Category varchar(100), @vAn_Height varchar(50), @vAn_Weight varchar(50), @vAn_Color varchar(50), @vAn_Gender varchar(50), @mAn_Price money, @iAn_Stock int,@imgAn_Image varbinary(max))
 as
 if(not exists(select * from Animal where iAn_Id=@iAn_Id))
 begin
-insert Animal(iAn_Id,vAn_Name,vAn_Category,vAn_Height,vAn_Weight,vAn_Color,vAn_Gender,mAn_Price,iAn_Stock)
-values(@iAn_Id, @vAn_Name, @vAn_Category, @vAn_Height, @vAn_Weight, @vAn_Color, @vAn_Gender, @mAn_Price, @iAn_Stock)
+insert Animal(iAn_Id,vAn_Name,vAn_Category,vAn_Height,vAn_Weight,vAn_Color,vAn_Gender,mAn_Price,iAn_Stock,imgAn_Image)
+values(@iAn_Id, @vAn_Name, @vAn_Category, @vAn_Height, @vAn_Weight, @vAn_Color, @vAn_Gender, @mAn_Price, @iAn_Stock,@imgAn_Image)
 end
 else
 print'animal id cannot be duplicated'
+
 
 
 
@@ -98,11 +99,12 @@ print'cart details deleted'
 
 
 --9--
-create proc usp_Accessories_Insert(@iAcc_Id int, @vAcc_Name varchar(100), @mAcc_Price money, @iAcc_Stock int)
+//before executing this procedure execute the query-"alter table Accessories add imgAcc_Image varbinary(max)"
+screate proc usp_Accessories_Insert(@iAcc_Id int, @vAcc_Name varchar(100), @mAcc_Price money, @iAcc_Stock int,@imgAcc_Image varbinary(max))
 as
 if(not exists(select * from Accessories where iAcc_Id=@iAcc_Id))
 begin
-insert Accessories(vAcc_Name, mAcc_Price,iAcc_Stock) values( @vAcc_Name, @mAcc_Price ,@iAcc_Stock)
+insert Accessories(vAcc_Name, mAcc_Price,iAcc_Stock,imgAcc_Image) values( @vAcc_Name, @mAcc_Price ,@iAcc_Stock,@imgAcc_Image)
 end
 else
 print'cannot be inserted'
@@ -120,7 +122,7 @@ print'cannot be updated'
 
 
 --11--
-create proc usp_Accessories_Update(@iAcc_Id int, @vAcc_Name varchar(100), @mAcc_Price money, @iAcc_Stock int)
+create proc usp_Accessories_Delete(@iAcc_Id int, @vAcc_Name varchar(100), @mAcc_Price money, @iAcc_Stock int)
 as
 if(exists(select * from Accessories where iAcc_Id=@iAcc_Id))
 begin

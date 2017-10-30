@@ -100,7 +100,7 @@ print'cart details deleted'
 
 --9--
 //before executing this procedure execute the query-"alter table Accessories add imgAcc_Image varbinary(max)"
-screate proc usp_Accessories_Insert(@iAcc_Id int, @vAcc_Name varchar(100), @mAcc_Price money, @iAcc_Stock int,@imgAcc_Image varbinary(max))
+create proc usp_Accessories_Insert(@iAcc_Id int, @vAcc_Name varchar(100), @mAcc_Price money, @iAcc_Stock int,@imgAcc_Image varbinary(max))
 as
 if(not exists(select * from Accessories where iAcc_Id=@iAcc_Id))
 begin

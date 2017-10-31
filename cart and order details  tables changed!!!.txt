@@ -1,0 +1,17 @@
+alter table cart add vCust_Id varchar(100)
+
+
+
+alter proc usp_Cart_insert(@vCart_Name varchar(100), @iCart_Quantity int, @mCart_Price money,@vCust_Id varchar(100))
+as
+insert Cart(vCart_Name ,iCart_Quantity ,mCart_Price,vCust_Id )
+values(@vCart_Name,@iCart_Quantity,@mCart_Price,@vCust_Id)
+select * from Cart
+
+
+
+
+create table OrderDetails(iOrder_id int identity(1,1),vOrderName varchar(100),iOrderQuantity int,iOrderPrice int)
+
+
+alter table OrderDetails add vCust_Id varchar(100)

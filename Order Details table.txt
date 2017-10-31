@@ -1,0 +1,5 @@
+﻿create table OrderDetails(iOrder_id int identity(1,1),vOrderName varchar(100),iOrderQuantity int,iOrderPrice int)
+
+
+
+select * from OrderDetails

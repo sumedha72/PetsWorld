@@ -1,0 +1,29 @@
+
+create table Accessories(iAcc_Id int identity(1,1), vAcc_Name varchar(100), mAcc_Price money, iAcc_Stock int)
+
+sp_help Accessories
+
+alter table Accessories add imgAcc_Image varbinary(max)
+
+alter proc usp_Accessories_Insert(@vAcc_Name varchar(100), @mAcc_Price money, @iAcc_Stock int,@imgAcc_Image varbinary(max))
+as
+
+begin
+insert Accessories(vAcc_Name, mAcc_Price,iAcc_Stock,imgAcc_Image) values( @vAcc_Name, @mAcc_Price ,@iAcc_Stock,@imgAcc_Image)
+end
+else
+print'cannot be inserted'
+
+alter proc usp_Accessories_Update(@vAcc_Name varchar(100), @mAcc_Price money, @iAcc_Stock int)
+as
+
+begin
+update Accessories set vAcc_Name=@vAcc_Name, mAcc_Price=@mAcc_Price, iAcc_Stock=@iAcc_Stock  where (vAcc_Name=@vAcc_Name)
+end
+
+alter proc usp_Accessories_Delete(@iAcc_Id int)
+as
+
+begin
+delete from Accessories where (iAcc_Id=@iAcc_Id)
+end

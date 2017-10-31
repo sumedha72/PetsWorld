@@ -1,0 +1,37 @@
+ protected void btnAdd_Click(object sender, EventArgs e)
+        {
+            SqlConnection con = new SqlConnection("Data Source = WIN-NJSGVM20SF5; Initial Catalog =VideoRental ; Integrated security= true");
+            SqlCommand cmd = new SqlCommand("usp_Video_Add", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            if (con.State == ConnectionState.Closed)
+
+                con.Open();
+            
+            cmd.Parameters.AddWithValue("@videoname", txtVideoName.Text);
+            cmd.Parameters.AddWithValue("@videoid", txtVideoId.Text);
+            cmd.Parameters.AddWithValue("@videoduration", txtVideoDuration.Text);
+            cmd.Parameters.AddWithValue("@rent", txtVideoRent.Text);
+            cmd.Parameters.AddWithValue("@category", ddlVideoCategory.SelectedItem.Text);
+            cmd.Parameters.Add(new SqlParameter("@videoimage", SqlDbType.VarBinary));
+
+            if(imgThumbnail.PostedFile.FileName !=""&& imgThumbnail.PostedFile.FileName!=null)
+            {
+                int len = imgThumbnail.PostedFile.ContentLength;
+                byte[] img = new byte[len];
+                imgThumbnail.PostedFile.InputStream.Read(img, 0, len);
+                cmd.Parameters["@videoimage"].Value = img;
+             
+                
+            }
+
+            int res = cmd.ExecuteNonQuery();
+            if (res > 0)
+
+                lblMessage.Text = "Video added";
+            else
+                lblMessage.Text = "Video ID already exists";
+           
+           
+
+             
+        }

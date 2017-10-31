@@ -1,0 +1,105 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Mas.master.cs" Inherits="Home.Mas" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <link href="MyCss.css" rel="stylesheet" />
+
+     <link rel="stylesheet" type="text/css" href="Home.css" />
+     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+       <style>
+        .mySlides {display:normal;}
+        </style>
+
+  <%--  //Image slider script--%>
+
+    
+
+    <script src="Scripts/jquery-3.2.1.min.js"></script>
+    <script src="Scripts/jquery.validate.min.js"></script>
+    <script src="Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="Scripts/jquery-ui-1.12.1.min.js"></script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+</head>
+<body>  
+      <form id="form1" runat="server">  
+   <div id="container" style="width:100%;height:80%">
+
+           <div id="sinUpIN"  style="height:30px">
+        
+        <asp:HyperLink Text="SignUp &nbsp" runat="server" ID="signupFromHome" NavigateUrl="~/SignUp.aspx"/>
+        <asp:HyperLink Text="&nbsp Login &nbsp;" runat="server" ID="loginFromHome" NavigateUrl="~/Login.aspx"/>
+        <asp:Label Text="Welcome   " runat="server" id="welcomeTxt" Visible="false"/>
+         <asp:Button Text="Logout" runat="server" ID="Llogout" OnClick="Llogout_Click" Visible="false" CssClass="Llogout" style="height:30px"/>
+  
+        
+        
+   </div>
+    
+    <div id="etitle">
+       
+        <img src="Images/logotext.png" height="80"/>
+        
+    </div>
+
+        
+    
+       <div id="box">
+        
+              
+        <div id="sf3">
+           
+            <%--CssClass="form-wrapper-2 cf--%>
+
+            <asp:TextBox runat="server" id="searchbar" placeholder="Search eg." CssClass="search_3"/>
+            
+            <asp:Button id="searchBtn" Text="Search" runat="server" CssClass="submit_3" OnClick="searchBtn_Click"/>
+              
+              
+             </div>
+              
+                  </div>
+     
+           <div id="navholdz">
+                <ul>
+                    <li><a class="active" href="Index.aspx">Home</a></li>
+                       <li><a href="#Adopt">Buy a Pet</a></li>
+                     <li><a  href="#Sell">Sell a Pet</a></li>
+                    <li><a href="#Shop">Shop Accessories</a></li>
+                    <li><a href="PetEncyclopedia.aspx">Pet Encyclopedia</a></li>
+                   <%-- <li style="float:right" class="active"><a href="UserReg.aspx">Register</a></li>
+                    <li style="float:right"><a href="#login">Login</a>
+                        <ul>
+                          <li>
+                          <a href="UserLogin.aspx">User</a>
+                          <a href="AdminLogin.aspx">Admin</a>
+                          </li>
+                        </ul>
+                    </li>--%>
+                </ul>
+               
+           </div>
+
+  
+  
+    <div id="con">  
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">  
+          
+        </asp:ContentPlaceHolder>  
+    </div>  
+  
+  
+           
+
+  </div>
+
+  
+      
+    </form>  
+</body>  
+</html>

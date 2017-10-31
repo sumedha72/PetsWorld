@@ -1,0 +1,19 @@
+ if(e.CommandName=="Reject")
+            {
+
+                SqlConnection con = new SqlConnection("Data Source = WIN-NJSGVM20SF5; Initial Catalog =PetsWorld ; Integrated security= true");
+                SqlCommand cmd = new SqlCommand("usp_AdminCheck_Delete", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                if (con.State == ConnectionState.Closed)
+
+                    con.Open();
+
+                var del_id = e.Item.FindControl("Ac_Id");
+                cmd.Parameters.AddWithValue("@Ac_Id", del_id);
+                int res = cmd.ExecuteNonQuery();
+                if (res > 0)
+
+                    lblMessage.Text = "Animal deleted";
+                else
+                    lblMessage.Text = "Animal not found";
+            }

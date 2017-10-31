@@ -1,0 +1,49 @@
+﻿    <asp:DataList ID="dlbooks" OnItemCommand="dlbooks_ItemCommand" runat="server" RepeatDirection="Horizontal" GridLines="Both" RepeatColumns="3">
+        <ItemTemplate>
+            <table>
+                <tr>
+                    <td>
+                        <asp:Image Width="200" Height="200" ImageUrl='<%#"~/Handler1.ashx?BookID="+Eval("id") %>' ID="imgbook" runat="server" />
+                        <br />
+                        <asp:Label Text='<%#"Name:"+Eval("name") %>'  ID="bookname" runat="server" ForeColor="WhiteSmoke" />
+                        <br />
+                         <asp:Label Text='<%#"Category:"+Eval("category") %>'  ID="bookcategory" runat="server" ForeColor="WhiteSmoke" />
+                        <br />
+                         <asp:Label Text='<%#"Author:"+Eval("author") %>'  ID="bookauthor" runat="server" ForeColor="WhiteSmoke" />
+                        <br />
+                         <asp:Label Text='<%#"Price:"+Eval("price") %>'  ID="bookprice" runat="server" ForeColor="WhiteSmoke" />
+                        <br />
+                       <asp:DropDownList runat="server" ID="ddlqty">
+                           <asp:ListItem Value="0" Text="--select--" />
+                            <asp:ListItem  Text="1" />
+                            <asp:ListItem  Text="2" />
+                            <asp:ListItem  Text="3" />
+                            <asp:ListItem  Text="4" />
+                            <asp:ListItem  Text="5" />
+                       </asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="rvqty" ControlToValidate="ddlqty" runat="server" ErrorMessage="Please enter the number of books!"></asp:RequiredFieldValidator>
+                        <asp:Button CommandName="Select" runat="server"  ID="Select" CommandArgument='<%#Eval("price") %>' Text="Select" />
+                        <br />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Button ID="btn" runat="server" Text="PROCEED" OnClick="btn_Click" />
+                    </td>
+                </tr>
+            </table>
+        </ItemTemplate>
+            </asp:DataList>
+        <asp:Label ID="lblmsg" runat="server" />
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+  protected void dlbooks_ItemCommand(object source, DataListCommandEventArgs e)
+        {
+            if(e.CommandName=="Select")
+            {
+                int quantity = Convert.ToInt32((e.Item.FindControl("ddlqty") as DropDownList).SelectedItem.Text);
+                int total = (quantity * (Convert.ToInt32(e.CommandArgument)));
+                lblmsg.Text = "Total amount is:" + total;
+            }
+        }

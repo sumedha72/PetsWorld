@@ -15,11 +15,26 @@ namespace petsworld
         SqlCommand cmd = new SqlCommand();
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            string custid=Session["UserID"].ToString();
+            con = new SqlConnection("data source=WIN-MQ25VDQV2DC;Initial Catalog=petsworld;Integrated Security=true");
+            cmd = new SqlCommand("select * from Cart where vCust_Id=@vCust_Id", con);
+            cmd.Parameters.AddWithValue("@vCust_Id", );
+            con.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.HasRows)
+            {
+                DataTable dt = new DataTable();
+                dt.Load(reader);
+                dlcart.DataSource = dt;
+                dlcart.DataBind();
+
+            }
+            con.Close();
         }
 
         protected void CustomerCart_ItemCommand(object source, DataListCommandEventArgs e)
         {
+            string custid = Session["UserID"].ToString();
             if (e.CommandName == "Delete")
             {
                 con = new SqlConnection("data source=WIN-MQ25VDQV2DC;Initial Catalog=petsworld;Integrated Security=true");
@@ -50,16 +65,13 @@ namespace petsworld
                 if (rdr.HasRows)
                 {
                     rdr.Read();
-
-
-                    String OrderId = (e.CommandArgument).ToString().Substring(1, 3) + Session["CustId"];
+                    //String OrderId = (e.CommandArgument).ToString().Substring(1, 3) + Session["CustId"];
                     SqlCommand cmd1;
-                    cmd1 = new SqlCommand("Insert into CustomerOrder(vOrderId,cCustomerId,vBookISBN,vBookName,decBookPrice)values(@OrderId,@CustomerId,@BookISBN,@BookName,@BookPrice)", con);
-                    cmd1.Parameters.AddWithValue("@OrderId", OrderId);
-                    cmd1.Parameters.AddWithValue("@CustomerId", Session["CustId"]);
-                    cmd1.Parameters.AddWithValue("@BookISBN", e.CommandArgument);
-                    cmd1.Parameters.AddWithValue("@BookName", rdr["vBookName"].ToString());
-                    cmd1.Parameters.AddWithValue("@BookPrice", rdr["decBookPrice"].ToString());
+                    cmd1 = new SqlCommand("Insert into OrderDetails(vOrderName,iOrderQuantity,iOrderPrice,vCust_Id)values(@vOrderName,@iOrderQuantity,@iOrderPrice,@vCust_Id)", con);
+                    cmd1.Parameters.AddWithValue("@vOrderName", rdr["vCart_Name"].ToString());
+                    cmd1.Parameters.AddWithValue("@iOrderQuantity", rdr["iCart_Quantity"].ToString());
+                    cmd1.Parameters.AddWithValue("@iOrderPrice", rdr["mCart_Price"].ToString());
+                    cmd1.Parameters.AddWithValue("@vCust_Id", Session["CustId"]);
 
 
                     if (con.State == ConnectionState.Closed)
@@ -71,22 +83,18 @@ namespace petsworld
                     {
                         rdr.Read();
                         SqlCommand cmd2;
-                        cmd2 = new SqlCommand("Delete from CustomerCart where vBookISBN=@BookId", con);
-                        cmd2.Parameters.AddWithValue("@BookId", e.CommandArgument);
+                        cmd2 = new SqlCommand("Delete from Cart where iCart_Id=@iCart_Id", con);
+                        cmd2.Parameters.AddWithValue("@iCart_Id", e.CommandArgument);
                         if (con.State == ConnectionState.Closed)
                         {
                             con.Open();
                         }
-                        cmd.ExecuteNonQuery();
-                        Response.Redirect("UserCart.aspx");
-                        //rdr.Read();
-                        //DataTable dt = new DataTable();
-                        //dt.Load(rdr);
-
+                        cmd2.ExecuteNonQuery();
+                        Response.Redirect("cart.aspx");
                     }
                 }
 
             }
         }
-}
+    }
 }

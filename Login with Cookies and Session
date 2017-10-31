@@ -1,0 +1,65 @@
+public partial class UserLogin : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                HttpCookie userInfo = Request.Cookies["userinfo"];
+                if (userInfo != null)
+                {
+                    txtEmail.Text = userInfo["vEmail"].ToString();
+                    txtPassword.Attributes.Add("value", userInfo["vPassword"].ToString());
+                }
+            }
+        }
+
+        protected void cmdLogin_Click(object sender, EventArgs e)
+        {
+            string hashpassword = PasswordHash.HashPassword(txtPassword.Text);
+            SqlConnection con = new SqlConnection("Data Source=WIN-F41K21R5C2N;Initial Catalog=PetsWorld;Integrated Security=true;");
+            if (con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
+            SqlCommand cmd = new SqlCommand("select * from UserReg where vEmail=@vEmail and vPassword=@vPassword", con);
+            cmd.Parameters.AddWithValue("@vEmail", txtEmail.Text);
+            cmd.Parameters.AddWithValue("@vPassword", hashpassword);
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            if (chkRemember.Checked) 
+            {
+                HttpCookie cookies = new HttpCookie("userinfo");
+                cookies["vEmail"] = txtEmail.Text;
+                cookies["vPassword"] = txtPassword.Text;
+                cookies.Expires = DateTime.Now.AddDays(7);
+                Response.Cookies.Add(cookies);
+            }
+            else
+            {
+                HttpCookie cookie = Request.Cookies["userinfo"];
+                if(cookie!=null)
+                {
+                    cookie.Expires = DateTime.Now.AddDays(-1);
+                    Response.Cookies.Add(cookie);
+                }
+                //Response.Redirect("UserWelcome.aspx");
+            }
+
+
+
+            if (dt.Rows.Count > 0)
+            {
+                Session["Email"] = txtEmail.Text;
+                Session["FirstName"] = dt.Rows[0]["vFirstName"].ToString();
+                Session["LogStatus"] = true;
+                    
+                Response.Redirect("RentCar.aspx");
+                Session.Timeout = 5;
+            }
+            else
+            {
+               Response.Write("Invalid Username or Password");
+            }
+        }

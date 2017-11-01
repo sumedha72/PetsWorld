@@ -1,0 +1,96 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace PetsWorld.com
+{
+    public partial class MasterPage : System.Web.UI.MasterPage
+    {
+        //protected override void OnPreRender(EventArgs e)
+        //{
+        //    if (!Page.IsPostBack)
+        //    {
+        //        if (Session["LogStatus"] != null)
+        //        {
+        //            ((HyperLink)Master.FindControl("signupFromHome")).Visible = true;
+        //            ((HyperLink)Master.FindControl("loginFromHome")).Visible = true;
+        //            ((Label)Master.FindControl("welcomeTxt")).Visible = true;
+        //            ((Button)Master.FindControl("Llogout")).Visible = true;
+        //            base.OnPreRender(e);
+        //        }
+        //    }
+        //}
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            //this.Page.FindControl("signupFromHome").Visible = false;
+            //this.Page.FindControl("loginFromHome").Visible = false;
+
+            //if (!Page.IsPostBack)
+            //{
+            //    if (Session["LogStatus"] != null)
+            //    {
+            //        this.Page.FindControl("welcomeTxt").Visible = true;
+            //        this.Page.FindControl("Llogout").Visible = true;
+            //        welcomeTxt.Text = "WELCOME: " + Session["Name"].ToString();
+            //    }
+            //}
+
+            if (Session["LogStatus"] != null)
+            {
+                signupFromHome.Visible = false;
+                loginFromHome.Visible = false;
+
+                welcomeTxt.Visible = true;
+                Llogout.Visible = true;
+
+                string b = Session["Name"].ToString();
+
+                welcomeTxt.Text = "WELCOME  "+ b;
+            }
+        }
+
+
+        protected void Llogout_Click(object sender, EventArgs e)
+        {
+            if (Session["Email"] != null && Session["Name"] != null)
+            {
+                Session.Remove("Email");
+                Session.Remove("FiName");
+                Session.RemoveAll();
+                Session.Abandon();
+                Response.Redirect("Home.aspx");
+            }
+        }
+
+        protected void searchBtn_Click(object sender, EventArgs e)
+        {
+
+            Response.Redirect("AnimalDisplay.aspx?vAnimalCategory=" + searchbar.Text);
+            
+        }
+
+     
+        protected void lbDogs_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AnimalDisplay.aspx?vAnimalCategory=" + "Dog");
+        }
+
+        protected void lbCats_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AnimalDisplay.aspx?vAnimalCategory=" + "Cat");
+        }
+
+        protected void lbRabbit_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AnimalDisplay.aspx?vAnimalCategory=" + "Rabbit");
+        }
+
+        protected void lbBird_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AnimalDisplay.aspx?vAnimalCategory=" + "Bird");
+        }
+    }
+}

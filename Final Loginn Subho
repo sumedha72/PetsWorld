@@ -1,0 +1,68 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Loginn.aspx.cs" Inherits="PetsWorld.com.Loginn" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="Content/MyCss.css" rel="stylesheet" />
+</head>
+<body bgcolor="cyan">
+    <form id="form1" runat="server">
+    <div>
+
+        <center><div id="etitle">
+       
+        <img src="Images/logotext.png" height="100"/>
+        
+    </div></center>
+
+        <h2><center>Login</center></h2>
+                <center><table class="center" cellpadding="3" cellspacing="10">
+                   <tr>
+                        <td>
+                            <label class="label">Email</label>
+                        </td>
+                        <td>
+                             <asp:TextBox CssClass="txtbox" runat ="server" ID="txtEmail" placeholder="Email" />
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ForeColor="Red" runat="server" ErrorMessage="Email can't be blank" ID="rfvEmail" Text="*" ControlToValidate="txtEmail" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="label">Password</label>
+                        </td>
+                        <td>
+                            <asp:TextBox TextMode="Password" CssClass="txtbox" runat="server" ID="txtPassword" placeholder="Password"/>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ForeColor="Red" runat="server" ErrorMessage="Password can't be blank" ID="rfvPassword" Text="*" ControlToValidate="txtPassword" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  colspan="2">
+                           <asp:CheckBox ID="chkRemember" Text="Remember Me" runat="server" />
+                        </td>                     
+                    </tr>
+                    <tr>
+                         <td colspan="2">                   
+                            <label class="label">
+                                Don't have an Account ?
+                               <asp:HyperLink ID="lnkSignUpPage" runat="server" Text="Sign Up"  NavigateUrl="~/SignUpp.aspx"></asp:HyperLink>
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                             <asp:Button CssClass="btn" ID="cmdLogin" Text="Login" runat="server" OnClick="cmdLogin_Click" />
+                        </td>
+                    </tr>
+
+                </table>
+                </center>
+    </div>
+    </form>
+</body>
+</html>

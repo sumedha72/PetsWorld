@@ -1,0 +1,8 @@
+create proc usp_Cust_Add(@vCust_Name varchar(100), @vCust_Gender varchar(50), @vCust_Phone varchar(50),
+ @dCust_DOB datetime, @vCust_Email varchar(100), @vCust_Password varchar(100), @vCust_Address varchar(300)) 
+as
+if (not exists(select * from Customer where vCust_Email=@vCust_Email))
+begin
+insert Customer(vCust_Name,vCust_Gender,vCust_Phone,dCust_DOB,vCust_Email,vCust_Password,vCust_Address)
+values(@vCust_Name,@vCust_Gender,@vCust_Phone,@dCust_DOB,@vCust_Email,@vCust_Password,@vCust_Address)
+end

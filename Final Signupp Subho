@@ -1,0 +1,132 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SignUpp.aspx.cs" Inherits="PetsWorld.com.SignUpp" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="Content/MyCss.css" rel="stylesheet" />
+</head>
+<body bgcolor="cyan">
+    <form id="form1" runat="server">
+    <div>
+        <h2><center>Sign Up</center></h2>
+                <table class="center" cellpadding="3" cellspacing="10" style="margin-left:150px;">
+                    <tr>
+                        <td>
+                            <label class="label">Name</label>
+                        </td>
+                        <td>
+                            <asp:TextBox runat="server" id="txtName" CssClass="txtbox" placeholder="Name"/>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="rfvName" runat="server" ErrorMessage="Name can't be blank" ControlToValidate="txtName" ForeColor="Red"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>                 
+                    <tr>
+                        <td>
+                            <label class="label">Email</label>
+                        </td>
+                        <td>
+                             <asp:TextBox runat="server" id="txtEmail" CssClass="txtbox" placeholder="Email"/>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Email can't be blank" ControlToValidate="txtEmail" ForeColor="Red"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ID="revEmail" runat="server" ErrorMessage="Enter proper Email ID" ControlToValidate="txtEmail" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ForeColor="Red"></asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <label class="label">Password</label>
+                        </td>
+                        <td>
+                             <asp:TextBox runat="server" id="txtPassword" CssClass="txtbox" placeholder="Password" TextMode="Password"/>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ErrorMessage="Password can't be blank" ControlToValidate="txtPassword" ForeColor="Red" ></asp:RequiredFieldValidator>                      
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="label">Confirm Password</label>
+                        </td>
+                        <td>
+                             <asp:TextBox runat="server" id="txtCPassword" CssClass="txtbox" placeholder="Confirm Password" TextMode="Password"/>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="rfvCPassword" runat="server" ControlToValidate="txtCPassword" ForeColor="Red" ErrorMessage=""></asp:RequiredFieldValidator>
+                            <asp:CompareValidator ID="cvCPassword" runat="server" ErrorMessage="Password doesn't match" ControlToCompare="txtPassword" ForeColor="Red" ControlToValidate="txtCPassword"></asp:CompareValidator>
+                        </td>
+                      </tr>
+                     <tr>
+                        <td>
+                            <label class="label">Address</label>
+                        </td>
+                        <td>
+                            <asp:TextBox runat="server" id="txtAddress" Width="180px" Height="50px" CssClass="txtbox" placeholder="Address"/>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="rfvAddress" runat="server" ErrorMessage="Address can't be blank" ControlToValidate="txtAddress" ForeColor="Red"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                        <tr>
+                        <td>
+                            <label>Gender</label>
+                        </td>
+                        <td>
+                            <asp:DropDownList ID="ddlGender" runat="server" CssClass="txtbox">
+                                <asp:ListItem Value="0" Text="--Select--" />
+                                <asp:ListItem Value="Male" Text="Male" />
+                                <asp:ListItem Value="Female" Text="Female" />
+                                <asp:ListItem Value="Others" Text="Others" />
+                            </asp:DropDownList>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator InitialValue="0" ID="rfvGender" runat="server" ErrorMessage="Gender can't be blank" ControlToValidate="ddlGender" ForeColor="Red"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>                 
+                    <tr>
+                        <td>
+                            <label>Mobile</label>
+                        </td>
+                        <td>
+                            <asp:TextBox runat="server" id="txtMobile" CssClass="txtbox" placeholder="Mobile"/>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="rfvMobile" runat="server" ErrorMessage="Mobile can't be blank" ControlToValidate="txtMobile" ForeColor="Red"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Date of Birth</label>
+                        </td>
+                        <td>
+                            <asp:TextBox runat="server" id="txtDOB" CssClass="txtbox" placeholder="Date of Birth"/><br />
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="rfvDOB" runat="server" ErrorMessage="Date of Birth can't be blank" ControlToValidate="txtDOB" ForeColor="Red"></asp:RequiredFieldValidator>
+                            <asp:RangeValidator ID="rvDOB" runat="server" MaximumValue="12/10/2012" ControlToValidate="txtDOB" ErrorMessage="Age Can't be less than 5 years"></asp:RangeValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  colspan="2">
+                            <asp:Button ID="cmdSignUp" runat="server" CssClass="btn" Text="Sign Up" OnClick="cmdSignUp_Click"/>                                                                                                                                     
+                            <asp:Button ID="btnReset" CssClass="btn" CausesValidation="false" Text="Reset" runat="server" OnClick="btnReset_Click"/>
+                        </td>
+                     </tr>
+                    <tr>  
+                        <td colspan="2">                        
+                            <label>
+                                Already have an Account ?<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <asp:HyperLink ID="lnkLoginPage" runat="server" Text="Sign In" NavigateUrl="~/Loginn.aspx">Sign In</asp:HyperLink>
+                            </label>
+                        </td>
+                    </tr>
+                 </table>
+
+    </div>
+    </form>
+</body>
+</html>
